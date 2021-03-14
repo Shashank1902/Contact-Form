@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 
@@ -7,7 +8,15 @@ app.use(express.static("public"));
 
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb+srv://Shashank1902:shashankdb@cluster0.zxive.mongodb.net/formDB", {useNewUrlParser: true,  useUnifiedTopology: true });
+const secret = process.env.SECRET;
+
+const mongoURL = `mongodb+srv://Shashank1902:${secret}@cluster0.zxive.mongodb.net/formDB`
+
+// mongoose.connect("mongodb+srv://Shashank1902:shashankdb@cluster0.zxive.mongodb.net/formDB", {useNewUrlParser: true,  useUnifiedTopology: true });
+
+mongoose.connect(mongoURL, {useNewUrlParser: true,  useUnifiedTopology: true });
+
+console.log(mongoURL);
 
 const formSchema = new mongoose.Schema ({
     name: String,
@@ -52,7 +61,12 @@ app.post("/", function(req, res) {
     
 });
 
-app.listen(3000, function()
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+
+app.listen(port, function()
 {
     console.log("Server started on port 3000");
 });
