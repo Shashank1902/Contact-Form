@@ -12,8 +12,6 @@ const secret = process.env.SECRET;
 
 const mongoURL = `mongodb+srv://Shashank1902:${secret}@cluster0.zxive.mongodb.net/formDB`
 
-// mongoose.connect("mongodb+srv://Shashank1902:shashankdb@cluster0.zxive.mongodb.net/formDB", {useNewUrlParser: true,  useUnifiedTopology: true });
-
 mongoose.connect(mongoURL, {useNewUrlParser: true,  useUnifiedTopology: true });
 
 console.log(mongoURL);
@@ -43,6 +41,8 @@ app.post("/", function(req, res) {
     const email = req.body.email;
     const msg = req.body.message;
 
+    const status = res.statusCode;
+
     const form = new Form ({
         name: name,
         email: email,
@@ -52,12 +52,11 @@ app.post("/", function(req, res) {
 
     form.save();
 
-    console.log(name);
-    console.log(email);
-    console.log(msg);
-    console.log(date);
-
+    if(status === 200) {
     res.sendFile(__dirname +  "/thanks.html");
+    } else {
+        res.sendFile(__dirname +  "/failed.html")
+    }
     
 });
 
