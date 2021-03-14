@@ -50,7 +50,7 @@ app.post("/", function(req, res) {
         date: date,
     });
 
-    // form.save();
+    form.save();
 
     console.log(name);
     console.log(email);
