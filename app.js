@@ -10,7 +10,7 @@ const mongoose = require("mongoose");
 
 const secret = process.env.SECRET;
 
-const mongoURL = `mongodb+srv://Shashank1902:${secret}@cluster0.zxive.mongodb.net/formDB`
+const mongoURL = secret;
 
 mongoose.connect(mongoURL, {useNewUrlParser: true,  useUnifiedTopology: true });
 
