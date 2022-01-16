@@ -14,7 +14,6 @@ const mongoURL = secret;
 
 mongoose.connect(mongoURL, {useNewUrlParser: true,  useUnifiedTopology: true });
 
-console.log(mongoURL);
 
 const formSchema = new mongoose.Schema ({
     name: String,
